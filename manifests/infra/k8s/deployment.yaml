@@ -24,6 +24,6 @@ spec:
             - name: MONGO_INITDB_DATABASE
               value: 'co2Ampel'
             - name: MONGO_HOSTNAME
-              value: 'localhost'
+              value: 'mongodb-service'
             - name: MONGO_PORT
               value: '27017'
