@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: displaydata-ingress
+spec:
+  rules:
+  - host: timostroehlein.microservices.com
+    http:
+      paths:
+      - path: /displaydata
+        pathType: Prefix
+        backend:
+          service:
+            name: displaydata-service
+            port:
+              number: 4001

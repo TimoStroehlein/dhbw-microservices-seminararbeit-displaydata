@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: displaydata-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: displaydata
+  template:
+    metadata:
+      labels:
+        app: displaydata
+    spec:
+      containers:
+        - name: displaydata
+          imagePullPolicy: Always
+          image: replace/me/displaydata
+          env:
+            - name: MONGO_INITDB_USERNAME
+              value: 'test'
+            - name: MONGO_INITDB_PASSWORD
+              value: 'test'
+            - name: MONGO_INITDB_DATABASE
+              value: 'co2Ampel'
+            - name: MONGO_HOSTNAME
+              value: 'localhost'
+            - name: MONGO_PORT
+              value: '27017'

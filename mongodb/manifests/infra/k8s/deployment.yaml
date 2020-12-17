@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          imagePullPolicy: Always
+          image: replace/me/mongodb
+          env:
+            - name: MONGO_INITDB_USERNAME
+              value: 'test'
+            - name: MONGO_INITDB_PASSWORD
+              value: 'test'
+            - name: MONGO_INITDB_DATABASE
+              value: 'co2Ampel'
+            - name: MONGO_HOSTNAME
+              value: 'localhost'
+            - name: MONGO_PORT
+              value: '27017'
