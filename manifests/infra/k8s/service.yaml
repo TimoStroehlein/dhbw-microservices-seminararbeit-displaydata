@@ -1,7 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: displaydata-service
+  name: displaydata
+  labels:
+    app: displaydata
 spec:
   type: NodePort
   selector:

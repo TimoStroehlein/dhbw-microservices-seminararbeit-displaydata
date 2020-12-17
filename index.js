@@ -30,7 +30,7 @@ app.get('/data',(req,res)=> {
 }); 
 
 // post event is received from eventbus - so put the data into memory
-app.post('/events',(req,res)=> {
+app.post('/events', (req, res) => {
   const { type, measurementdata } = req.body;
 
   console.log(type); 
@@ -47,7 +47,7 @@ app.post('/events',(req,res)=> {
   measurementModel.save((err, postm) => {
       if (err) {
           console.log(err);
-          return response.status(500).send();
+          return res.status(500).send();
       }
   });
 

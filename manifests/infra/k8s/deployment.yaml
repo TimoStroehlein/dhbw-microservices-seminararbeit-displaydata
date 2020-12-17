@@ -1,7 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: displaydata-deployment
+  name: displaydata
+  labels:
+    app: displaydata
 spec:
   replicas: 1
   selector:
@@ -24,6 +26,6 @@ spec:
             - name: MONGO_INITDB_DATABASE
               value: 'co2Ampel'
             - name: MONGO_HOSTNAME
-              value: 'mongodb-service'
+              value: 'mongodb'
             - name: MONGO_PORT
               value: '27017'
