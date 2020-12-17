@@ -1,0 +1,11 @@
+version: '3'
+services:
+  dhbw-microservices-seminararbeit-mongo:
+    image: "mongo"
+    container_name: mongodb
+    env_file:
+      - mongodb.env
+    ports:
+      - "27017:27017"
+    volumes: 
+      - '~/mongo/data:/data/mongodb'
