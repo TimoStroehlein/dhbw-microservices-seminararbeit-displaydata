@@ -13,7 +13,7 @@ app.use(cors());
 // Connection to mongodb
 const mongoose = require('mongoose');
 const MeasurementModel = require('./measurementModel.js').MeasurementModel;
-const DB_URI = 'mongodb://localhost:27017/co2Ampel';
+const DB_URI = 'mongodb://test:test@localhost:27017/co2Ampel';
 
 mongoose.connect(DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
     console.log("connected to mongo db");
