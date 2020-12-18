@@ -1,7 +1,7 @@
 // simple node.js application to receive data  from eventbus store the data in memory
 // and on get request print the data to console.log
 
-require('dotenv').config({path: 'mongodb.env'})  // read mongodb.env file
+require('dotenv').config({path: 'mongodb/mongodb.env'})  // read mongodb.env file
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');

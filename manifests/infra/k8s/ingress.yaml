@@ -4,7 +4,8 @@ metadata:
   name: displaydata
 spec:
   rules:
-  - http:
+  - host: timostroehlein.microservices-seminararbeit.com
+    http:
       paths:
       - path: /data
         pathType: Prefix
