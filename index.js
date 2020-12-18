@@ -21,8 +21,16 @@ mongoose.connect(DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}).then
     console.log("connected to mongo db");
 });
 
+app.get('/ready', (req, res) => {
+  if (mongoose.connection.readyState == 0) {
+    mongoose.connect(DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+        console.log("connected to mongo db");
+    });
+  }
+});
+
 // get request received - print the measurement data to console log and return it to requester
-app.get('/data',(req,res)=> {
+app.get('/data', (req, res) => {
     MeasurementModel.find()
       .then((measurements) => {
         res.status(200).send(measurements);
