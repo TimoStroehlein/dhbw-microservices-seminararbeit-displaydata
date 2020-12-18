@@ -17,17 +17,18 @@ const isset = process.env.MONGO_INITDB_USERNAME && process.env.MONGO_INITDB_PASS
 const DB_URI = `mongodb://${isset ? (process.env.MONGO_INITDB_USERNAME + ':' + process.env.MONGO_INITDB_PASSWORD + '@') : ''}${process.env.MONGO_HOSTNAME}:${process.env.MONGO_PORT}/${process.env.MONGO_INITDB_DATABASE}`;
 console.log(DB_URI)
 
-mongoose.connect(DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
-    console.log("connected to mongo db");
-});
-
-app.get('/ready', (req, res) => {
-  if (mongoose.connection.readyState == 0) {
-    mongoose.connect(DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
-        console.log("connected to mongo db");
-    });
-  }
-});
+var connectWithRetry = function() {
+  return mongoose.connect(DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }).then(() => {
+    console.log('connected to mongo db');
+  }, err => {
+    console.log('Failed to connect to mongo on startup - retrying in 5 sec')
+    setTimeout(connectWithRetry, 5000);
+  });
+};
+connectWithRetry();
 
 // get request received - print the measurement data to console log and return it to requester
 app.get('/data', (req, res) => {

@@ -29,17 +29,3 @@ spec:
               value: 'mongodb'
             - name: MONGO_PORT
               value: '27017'
-          readinessProbe:
-            httpGet:
-              path: /data
-              port: 4001
-            initialDelaySeconds: 15
-            timeoutSeconds: 1
-            periodSeconds: 15
-          livenessProbe:
-            httpGet:
-              path: /data
-              port: 4001
-            initialDelaySeconds: 15
-            timeoutSeconds: 1
-            periodSeconds: 15
