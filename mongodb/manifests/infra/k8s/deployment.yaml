@@ -25,3 +25,16 @@ spec:
               value: 'test'
             - name: MONGO_INITDB_DATABASE
               value: 'co2Ampel'
+          volumeMounts:
+            - name: mongodb-storage
+              mountPath: /data/db
+            - name: mongodb-initdb
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: mongodb-storage
+          persistentVolumeClaim:
+            claimName: mongodb-claim
+        - name: mongodb-initdb
+          configMap:
+            name: mongodb-initdb
+            defaultMode: 0744
