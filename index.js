@@ -1,7 +1,7 @@
 // simple node.js application to receive data  from eventbus store the data in memory
 // and on get request print the data to console.log
 
-require('dotenv').config({path: 'mongodb/mongodb.env'})  // read mongodb.env file
+require('dotenv').config({path: 'mongodb/.env'})  // read mongodb.env file
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -13,7 +13,9 @@ app.use(cors());
 // Connection to mongodb
 const mongoose = require('mongoose');
 const MeasurementModel = require('./measurementModel.js').MeasurementModel;
-const DB_URI = `mongodb://${process.env.MONGO_INITDB_USERNAME}:${process.env.MONGO_INITDB_PASSWORD}@${process.env.MONGO_HOSTNAME}:${process.env.MONGO_PORT}/${process.env.MONGO_INITDB_DATABASE}`;
+const isset = process.env.MONGO_INITDB_USERNAME && process.env.MONGO_INITDB_PASSWORD;
+const DB_URI = `mongodb://${isset ? (process.env.MONGO_INITDB_USERNAME + ':' + process.env.MONGO_INITDB_PASSWORD + '@') : ''}${process.env.MONGO_HOSTNAME}:${process.env.MONGO_PORT}/${process.env.MONGO_INITDB_DATABASE}`;
+console.log(DB_URI)
 
 mongoose.connect(DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
     console.log("connected to mongo db");
